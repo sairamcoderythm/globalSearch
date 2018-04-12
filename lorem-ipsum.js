@@ -1,59 +1,4 @@
-/**
- * @fileOverview Generates "Lorem ipsum" style text.
- * @author rviscomi@gmail.com Rick Viscomi,
- * 		tinsley@tinsology.net Mathew Tinsley
- * @version 1.0
- */
 
-/**
- *	Copyright (c) 2009, Mathew Tinsley (tinsley@tinsology.net)
- *	All rights reserved.
- *
- *	Redistribution and use in source and binary forms, with or without
- *	modification, are permitted provided that the following conditions are met:
- *		* Redistributions of source code must retain the above copyright
- *		  notice, this list of conditions and the following disclaimer.
- *		* Redistributions in binary form must reproduce the above copyright
- *		  notice, this list of conditions and the following disclaimer in the
- *		  documentation and/or other materials provided with the distribution.
- *		* Neither the name of the organization nor the
- *		  names of its contributors may be used to endorse or promote products
- *		  derived from this software without specific prior written permission.
- *
- *	THIS SOFTWARE IS PROVIDED BY MATHEW TINSLEY ''AS IS'' AND ANY
- *	EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- *	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- *	DISCLAIMED. IN NO EVENT SHALL <copyright holder> BE LIABLE FOR ANY
- *	DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- *	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- *	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- *	ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- *	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- *	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-/**
- * @class Jibborish generator.
- */
-var LoremIpsum = function () {
-};
-
-/**
- * Average number of words per sentence.
- * @constant {number}
- */
-LoremIpsum.WORDS_PER_SENTENCE_AVG = 24.460;
-
-/**
- * Standard deviation of the number of words per sentence.
- * @constant {number}
- */
-LoremIpsum.WORDS_PER_SENTENCE_STD = 5.080;
-
-/**
- * List of possible words.
- * @constant {Array.string}
- */
 LoremIpsum.WORDS = [
 		'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur',
 		'adipiscing', 'elit', 'curabitur', 'vel', 'hendrerit', 'libero',
@@ -93,17 +38,8 @@ LoremIpsum.prototype.singleWord = function () {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-/**
- * Generate "Lorem ipsum" style words.
- * @param num_words {number} Number of words to generate.
- * @return {string} "Lorem ipsum..."
- */
 LoremIpsum.prototype.generate = function (num_words) {
 	var words, ii, position, word, current, sentences, sentence_length, sentence;
-	
-	/**
-	 * @default 100
-	 */
 	num_words = num_words || 100;
 	
 	words = [LoremIpsum.WORDS[0], LoremIpsum.WORDS[1]];
@@ -147,17 +83,11 @@ LoremIpsum.prototype.generate = function (num_words) {
 	return sentences.join(' ');
 };
 
-/**
- * Insert commas and periods in the given sentence.
- * @param {Array.string} sentence List of words in the sentence.
- * @return {Array.string} Sentence with punctuation added.
- */
 LoremIpsum.prototype.punctuate = function (sentence) {
 	var word_length, num_commas, ii, position;
 	
 	word_length = sentence.length;
-	
-	/* End the sentence with a period. */
+
 	sentence[word_length - 1] += '.';
 	
 	if (word_length < 4) {
@@ -181,11 +111,6 @@ LoremIpsum.prototype.punctuate = function (sentence) {
 	return sentence;
 };
 
-/**
- * Produces a random number of commas.
- * @param {number} word_length Number of words in the sentence.
- * @return {number} Random number of commas
- */
 LoremIpsum.prototype.getRandomCommaCount = function (word_length) {
 	var base, average, standard_deviation;
 	
@@ -198,11 +123,7 @@ LoremIpsum.prototype.getRandomCommaCount = function (word_length) {
 	return Math.round(this.gaussMS(average, standard_deviation));
 };
 
-/**
- * Produces a random sentence length based on the average word length
- * of an English sentence.
- * @return {number} Random sentence length
- */
+
 LoremIpsum.prototype.getRandomSentenceLength = function () {
 	return Math.round(
 			this.gaussMS(
@@ -212,22 +133,15 @@ LoremIpsum.prototype.getRandomSentenceLength = function () {
 	);
 };
 
-/**
- * Produces a random number.
- * @return {number} Random number
- */
+turn {number} Random number
+
 LoremIpsum.prototype.gauss = function () {
 	return (Math.random() * 2 - 1) +
 			(Math.random() * 2 - 1) +
 			(Math.random() * 2 - 1);
 };
 
-/**
- * Produces a random number with Gaussian distribution.
- * @param {number} mean
- * @param {number} standard_deviation
- * @return {number} Random number
- */
+
 LoremIpsum.prototype.gaussMS = function (mean, standard_deviation) {
 	return Math.round(this.gauss() * standard_deviation + mean);
 };
